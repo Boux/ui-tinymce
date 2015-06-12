@@ -54,6 +54,8 @@ angular.module('ui.tinymce', [])
         expression = {};
 
         angular.extend(expression, scope.$eval(attrs.uiTinymce));
+        var customSetup = expression.setup;
+        delete expression.setup;
 
         options = {
           // Update model when calling setContent
@@ -93,8 +95,8 @@ angular.module('ui.tinymce', [])
               element.remove();
             });
 
-            if (expression.setup) {
-              expression.setup(ed, {
+            if (customSetup) {
+              customSetup(ed, {
                 updateView: updateView
               });
             }
